@@ -4,7 +4,7 @@ A Home Assistant add-on designed to act as a proxy between [Ecoqube](https://eco
 ## How it Works
 Ecoqube devices seem to make requests to the Ecosense API every ~10 minutes. They do not verify the servers ceritifcate though which means we can man in the middle the Ecosense server and capture the data.
 
-This sets up a webserver that will intercept and forward queries to the Ecosense server capture the data and publish it over MQTT.
+This sets up a webserver that will intercept and forward queries to the Ecosense server capture the data and publish it over MQTT. All data will still be forwarded to ecosense to the EcoQube app will continue to function.
 
 ## Setup Instructions
 
@@ -55,6 +55,8 @@ You need to add to your network DNS (via Pi-hole, pfSense, AdGuardHome or some o
 - api.cloud.ecosense.io
 
 This tells the Ecosense device connected to your network that when it does an update instead of talking to the Ecosense api, to instead talk to the Ecosense add-on instead.
+
+**Note: If you want to continue to use the EcoQube app will connected to your lan, you will want to make sure you only point the EcoCube device to your home assistant instance, the EcoCube app on your phone will still need to be able to get the actual IP of the ecosense server.**
 
 #### Connect the Ecosense Device
 
