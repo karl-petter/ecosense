@@ -2,7 +2,9 @@
 A Home Assistant add-on designed to act as a proxy between [Ecoqube](https://ecosense.io/products/ecoqube) radon devices. 
 
 ## How it Works
-Ecoqube devices seem to make requests to the Ecosense API every ~10 minutes. They do not verify the servers ceritifcate though which means we can impersonate the Ecosense server and capture the data.
+Ecoqube devices seem to make requests to the Ecosense API every ~10 minutes. They do not verify the servers ceritifcate though which means we can man in the middle the Ecosense server and capture the data.
+
+This sets up a webserver that will intercept queries from the EcoQube device, forward them to the Ecosense server, capture the data, and publish it over MQTT. Note that all measurement data will still be forwarded to ecosense, and you will still be able to view it in EcoQube app.
 
 ## Setup Instructions
 
@@ -48,15 +50,17 @@ Installing the Ecosense Add-On. This communicates directly with the Ecoqube devi
 
 #### Configure your local DNS
 
-You need to add to your network DNS (via Pi-hole, pfSense, or some other method) the following domain to point to your Home Assistant IP address:
+You need to add to your network DNS (via Pi-hole, pfSense, AdGuardHome or some other method) the following domain to point to your Home Assistant IP address:
 
 - api.cloud.ecosense.io
 
 This tells the Ecosense device connected to your network that when it does an update instead of talking to the Ecosense api, to instead talk to the Ecosense add-on instead.
 
+**Note: If you want to continue to use the EcoQube app while you are connected to your lan, you will want to make sure your DNS only redirects the EcoCube device to your home assistant instance, the EcoCube app on your phone will still need to be able to get the actual IP of the ecosense server.**
+
 #### Connect the Ecosense Device
 
-If you've done all of this correctly, the controller should begin reporting data to the Energy Smart Bridge, which in turn reports it to Mosquitto broker. Entities should be automatically created in your Home Assistant.
+If you've done all of this correctly, the controller should begin reporting data to the Addon/Container, which in turn reports it to Mosquitto broker. Entities should be automatically created in your Home Assistant.
 
 ## Credits
  [Dave Goldberg's blog post](https://embeddedartistry.com/blog/2024/11/04/reclaim-your-data-freeing-a-wi-fi-sensor-from-the-cloud/#Replacing-Their-Servers-With-Our-Own) 
