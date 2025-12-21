@@ -24,6 +24,7 @@ export const publish_config = async (serial_number, fw_version) => {
     await MQTT.publishAsync(`homeassistant/sensor/${serial_number}/radon/config`, JSON.stringify({
         "state_topic": `homeassistant/sensor/${serial_number}/radon/state`,
         "unit_of_measurement":"Bq/m³",
+        "state_class":"measurement",
         "unique_id": `${serial_number}-radon`,
         name: 'Radon',
         ...generateDeviceConfig(serial_number, fw_version),
