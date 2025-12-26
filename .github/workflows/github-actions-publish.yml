@@ -27,6 +27,6 @@ jobs:
         with:
           args: |
             --amd64 --aarch64 \
-            --docker-hub "ghcr.io/starsoccer" \
+            --docker-hub "ghcr.io/karl-petter" \
             --image "ecosense/{arch}" \
             --target ecosense
