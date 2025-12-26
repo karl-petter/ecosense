@@ -1,3 +1,3 @@
 # https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
-name: Ecosense Repo
-url: 'https://github.com/starsoccer/ecosense'
+name: Ecosense Repo - KP version
+url: 'https://github.com/karl-petter/ecosense/tree/kp-version'
